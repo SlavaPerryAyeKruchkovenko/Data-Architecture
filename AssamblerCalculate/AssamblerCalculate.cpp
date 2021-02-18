@@ -7,8 +7,9 @@
 
 using namespace std;
 
-class Calculate
-{public:
+class	Calculate
+{
+public:
     Calculate(char opperation)
     {
         this->sign = opperation;
@@ -16,9 +17,11 @@ class Calculate
 private:
     static char sign;
 public:
-    static int Add(int num1, int num2)
+    static int Add(int num1, int num2,bool isAdd)
     {
         int result;
+		if (!isAdd)
+			num2 *= -1;
         __asm
         {
             mov eax, num1;
@@ -77,6 +80,14 @@ static int ReadLine(string name)
     } while (!CheckConvert(input));
     return stoi(input);
 }
+static int CalculateX(int nums[])
+{
+	int x = Calculate::Add(nums[0],nums[1],true);
+	x = Calculate::Mul(x, nums[2]);
+	x = Calculate::Add(x, nums[3], false);
+	x = Calculate::Div(x, nums[4]);
+	return x
+}
 int main()
 {
     int nums[5];
@@ -85,6 +96,7 @@ int main()
         nums[i - 'a'] = ReadLine(to_string(i));
     }
     cout<<Calculate::Div(nums[0], nums[1]);
+	cout << ("Answer") << endl << CalculateX(nums);
     _getch();
     return 0;
 }
