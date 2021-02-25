@@ -24,54 +24,41 @@ int main()
 }
 static int UnsignedAdd(unsigned char a, unsigned char b)
 {
-    int num1 = a;
-    int num2 = b;
-    int returnNum;
+    unsigned char returnNum;
     int haveOverFlow=0;
     _asm
     {
-        mov eax, num1;
-        mov ebx, num2;
-        add eax, ebx;
-        cdq;
-        mov ebx, 256;
-        mov edx, 0;
-        div ebx;
-        mov returnNum, edx;
-
+        mov al, a;
+        mov bl, b;
+        adc al, bl;
+        mov returnNum, al;
+        jnc RET2
+        jc RET1;
         RET1:
             mov haveOverFlow, 1;
-
-        jo RET1;
-
         RET2:
-            mov haveOverFlow, 0;
-        jno RET2;
     }
     WriteLine(haveOverFlow, "UnSigned");
-    return returnNum;
+    return (int)returnNum;
 }
 static int SignedAdd(unsigned char a, unsigned char b)
 {
-    int returnNum;
-    int num1 = (signed char)a;
-    int num2 = (signed char)b;
-    int haveOverFlow = 0;
+    char returnNum;
+    signed char num1 = (signed char)a;
+    signed char num2 = (signed char)b;
+    int haveOverFlow=0;
     _asm
     {
-        mov eax, num1;
-        mov ebx, num2;
-        add eax, ebx;
-        mov returnNum, eax;
-
+        mov al, num1;
+        mov bl, num2;
+        adc al, bl;   
+        mov returnNum, al;
+        jno RET2
+        jo RET1;
         RET1:
             mov haveOverFlow, 1;
-        jo RET1;
-
-        RET2:
-            mov haveOverFlow, 0;
-        jno RET2;
-               
+        
+        RET2:     
     }
     WriteLine(haveOverFlow, "Signed");
     return returnNum;
