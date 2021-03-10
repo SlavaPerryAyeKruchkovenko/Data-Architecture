@@ -1,0 +1,3 @@
+﻿  factorial.cpp
+C:\repoditory\С++\Data-Architecture\Data-Architecture\factorial\factorial\factorial.cpp(26,3): warning C4102: End: неиспользованная метка
+  factorial.vcxproj -> C:\repoditory\С++\Data-Architecture\Data-Architecture\factorial\Debug\factorial.exe
