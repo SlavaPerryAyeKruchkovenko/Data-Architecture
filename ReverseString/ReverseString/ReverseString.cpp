@@ -11,14 +11,13 @@ static void ClearArray(string s)
 }
 int main()
 {
-    printf("input string\n");
+    /*printf("input string\n");
     int lengh;
     string sentecsice;
     cin >> sentecsice;
-    lengh = sentecsice.size();
-    char* sentecsice2 = new char[lengh + 1]{};
-    strcpy_s(sentecsice2, lengh + 1, sentecsice.c_str());
-    ClearArray(sentecsice);
+    lengh = sentecsice.size();*/
+    char sentecsice2[]{"offset"};
+    int lengh = 6;
     _asm
     {
         sub lengh, 1;
@@ -26,7 +25,7 @@ int main()
         mov eax, 0;
 
     inputLoop:
-        mov eax, sentecsice2[ebx];
+        mov al, sentecsice2[ebx];
         push eax;
         inc ebx;
 
@@ -36,12 +35,11 @@ int main()
         xor ebx, ebx;
     outputLoop:
         pop eax;
-        /*mov sentecsice2[ebx], eax;*/
+        mov sentecsice2[ebx], al;
         inc ebx;
 
         cmp ebx, lengh
             jng outputLoop;
     }
-    cout << sentecsice2 << endl;
-    system("pause");
+    printf((sentecsice2));
 }
